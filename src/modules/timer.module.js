@@ -13,10 +13,14 @@ export class TimerModule {//extends Module {
         this.#startButton = document.createElement('button');
         this.#timerInput = document.createElement('input');
         this.#timerDisplay = document.createElement('div');
+        this.audio = new Audio('../audio/mlg-airhorn.mp3')
 
         this.countdown = null;
 
-        this.#startButton.addEventListener('click', this.startTimer.bind(this));
+        this.#startButton.addEventListener("click", () => {
+          this.startTimer();
+          this.audio.play()
+        });
     }
 
     render() {
@@ -44,7 +48,6 @@ export class TimerModule {//extends Module {
 
     startTimer() {
         const timeInSeconds = parseInt(this.#timerInput.value);
-    
         if (isNaN(timeInSeconds)) {
           this.#timerDisplay.textContent = '';
           return;
